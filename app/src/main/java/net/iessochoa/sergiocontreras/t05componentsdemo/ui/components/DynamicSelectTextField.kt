@@ -1,5 +1,6 @@
 package net.iessochoa.sergiocontreras.t05componentsdemo.ui.components
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -64,12 +65,19 @@ fun DynamicSelectTextField(
         }
     }
 }
-
-@Preview(showBackground = true)
 @Composable
-fun DynamicSelectTextFieldPreview () {
-    val options = listOf("Option 1", "Option 2", "Option 3")
-    val selectedOption = options.first()
-    val label = "My custom dropdown"
-    DynamicSelectTextField(selectedOption, options, label, {})
+@Preview(showBackground = true)
+fun DynamicSelectTextFieldPreview() {
+    val options = listOf("Manzana", "Plátano", "Fresa", "Naranja")
+    // Estado para guardar la selección actual
+    val (seleccion, setSeleccion) = remember { mutableStateOf(options[0]) } // Opción por defecto
+
+
+    DynamicSelectTextField(
+        selectedValue = seleccion,
+        options = options,
+        label = "Fruta favorita",
+        onValueChangedEvent = setSeleccion // Actualiza el estado al seleccionar
+    )
+
 }
