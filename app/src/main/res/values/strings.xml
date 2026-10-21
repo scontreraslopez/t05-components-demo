@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">T05 Components Demo</string>
+    <string name="mtgcard_text_placeholder">Zombie sobrecosido</string>
 </resources>

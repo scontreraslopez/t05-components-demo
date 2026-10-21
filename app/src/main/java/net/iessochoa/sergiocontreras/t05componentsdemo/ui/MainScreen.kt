@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import net.iessochoa.sergiocontreras.t05componentsdemo.R
 import net.iessochoa.sergiocontreras.t05componentsdemo.ui.components.DynamicSelectTextField
 import net.iessochoa.sergiocontreras.t05componentsdemo.ui.components.MtgCard
+import net.iessochoa.sergiocontreras.t05componentsdemo.ui.components.RadioButtonRow
 import net.iessochoa.sergiocontreras.t05componentsdemo.ui.components.RatingBar
 
 /**
@@ -84,9 +85,6 @@ fun MainScreen(
             value = 50f,
             onValueChange = {}
         )
-
-        R
-
 
 
     }
