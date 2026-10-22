@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">T05 Components Demo</string>
     <string name="mtgcard_text_placeholder">Zombie sobrecosido</string>
+    <string name="top_app_bar_title">Forja de Cartas</string>
 </resources>

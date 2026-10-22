@@ -1,15 +1,21 @@
 package net.iessochoa.sergiocontreras.t05componentsdemo.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import net.iessochoa.sergiocontreras.t05componentsdemo.R
 import net.iessochoa.sergiocontreras.t05componentsdemo.ui.components.DynamicSelectTextField
 import net.iessochoa.sergiocontreras.t05componentsdemo.ui.components.MtgCard
@@ -32,12 +38,16 @@ fun MainScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
+
     ) {
+        val (tipoCarta, onTipoCartaSelect) = remember { mutableStateOf("") }
+        val (nombreCarta, onNombreCartaChange) = remember { mutableStateOf("")}
+
         // Aquí puedes agregar los componentes de la pantalla principal
         MtgCard(
             imagen = R.drawable.mtg_placeholder,
-            nombre = "Zombie Sobrecosido",
-            tipo = "Zombie",
+            nombre = nombreCarta,
+            tipo = tipoCarta,
             subtipo = "Guerrero"
         )
         Text("Power Level")
@@ -46,17 +56,17 @@ fun MainScreen(
             onRatingChange = {}
         )
         TextField(
-            value = "",
+            value = nombreCarta,
             label = { Text ("Nombre") },
-            onValueChange = {}
+            onValueChange = onNombreCartaChange
         )
         val listOfTipos = listOf("Criatura", "Instantáneo", "Artefacto")
 
         DynamicSelectTextField(
-            selectedValue = listOfTipos.first(),
+            selectedValue = tipoCarta,
             options = listOfTipos,
             label = "Tipo",
-            onValueChangedEvent = {}
+            onValueChangedEvent = onTipoCartaSelect
         )
 
         Text("Colores")
@@ -93,5 +103,7 @@ fun MainScreen(
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview() {
-    MainScreen()
+    MainScreen(
+
+    )
 }

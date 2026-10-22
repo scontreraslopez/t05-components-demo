@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 
 
 /**
@@ -35,5 +36,17 @@ fun RadioButtonRow(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RadioButtonRowPreview() {
+    val listaOpciones = listOf("Atún", "Peperoni", "Queso", "Bacon")
+    val opcionSeleccionada = listaOpciones[1]
+    RadioButtonRow(
+        listaOpciones,
+        opcionSeleccionada,
+        {}
+    )
 }
 
