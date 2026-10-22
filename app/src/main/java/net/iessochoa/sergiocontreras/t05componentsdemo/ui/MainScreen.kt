@@ -1,22 +1,31 @@
 package net.iessochoa.sergiocontreras.t05componentsdemo.ui
 
+import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.iessochoa.sergiocontreras.t05componentsdemo.R
+import net.iessochoa.sergiocontreras.t05componentsdemo.model.ColorMana
+import net.iessochoa.sergiocontreras.t05componentsdemo.model.TipoCarta
 import net.iessochoa.sergiocontreras.t05componentsdemo.ui.components.DynamicSelectTextField
 import net.iessochoa.sergiocontreras.t05componentsdemo.ui.components.MtgCard
 import net.iessochoa.sergiocontreras.t05componentsdemo.ui.components.RadioButtonRow
@@ -38,10 +47,26 @@ fun MainScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
         val (tipoCarta, onTipoCartaSelect) = remember { mutableStateOf("") }
         val (nombreCarta, onNombreCartaChange) = remember { mutableStateOf("")}
+        val listOfTipos = TipoCarta.entries.toTypedArray().map {it.toString()}
+        val coloresMana = ColorMana.entries.toTypedArray()
+
+        val coloresSeleccionados: MutableList<ColorMana> = remember { mutableStateListOf() }
+        val onColorSelected: (ColorMana) -> Unit = {
+            if (coloresSeleccionados.contains(it))
+                coloresSeleccionados -= it
+            else
+                coloresSeleccionados += it
+                //Log.d("CLICK", "Has clickado ${it.name} y la lista tiene ahora ${coloresSeleccionados.size}")
+        }
+
+
+
 
         // Aquí puedes agregar los componentes de la pantalla principal
         MtgCard(
@@ -55,32 +80,32 @@ fun MainScreen(
             rating = 3,
             onRatingChange = {}
         )
-        TextField(
+        OutlinedTextField(
             value = nombreCarta,
-            label = { Text ("Nombre") },
-            onValueChange = onNombreCartaChange
+            label = { Text (stringResource(R.string.textfield_nombre)) },
+            onValueChange = onNombreCartaChange,
+            modifier = Modifier.fillMaxWidth()
         )
-        val listOfTipos = listOf("Criatura", "Instantáneo", "Artefacto")
 
         DynamicSelectTextField(
             selectedValue = tipoCarta,
             options = listOfTipos,
-            label = "Tipo",
+            label = stringResource(R.string.dropdown_tipo),
             onValueChangedEvent = onTipoCartaSelect
         )
 
         Text("Colores")
-        Row() {
-            FilterChip(
-                label = { Text("Blanco") },
-                onClick = {},
-                selected = false
-            )
-            FilterChip(
-                label = { Text("Verde") },
-                onClick = {},
-                selected = true
-            )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            coloresMana.forEach {
+                FilterChip(
+                    label = { Text (it.nombre) },
+                    onClick = { onColorSelected(it) },
+                    selected = coloresSeleccionados.contains(it),
+                )
+            }
         }
 
         Slider(
