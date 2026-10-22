@@ -73,7 +73,8 @@ fun MainScreen(
             imagen = R.drawable.mtg_placeholder,
             nombre = nombreCarta,
             tipo = tipoCarta,
-            subtipo = "Guerrero"
+            subtipo = "Guerrero",
+            coloresMana = coloresSeleccionados.map {it.toString()},
         )
         Text("Power Level")
         RatingBar(
