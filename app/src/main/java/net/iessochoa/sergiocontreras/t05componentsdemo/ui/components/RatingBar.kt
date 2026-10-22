@@ -1,5 +1,6 @@
 package net.iessochoa.sergiocontreras.t05componentsdemo.ui.components
 
+import android.widget.RatingBar
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
@@ -60,5 +61,5 @@ fun RatingBar(
 @Composable
 fun RatingBarPreview() = RatingBar(
     rating = 3,
-    onRatingChange =  {}
+    onRatingChange = {}
 )
